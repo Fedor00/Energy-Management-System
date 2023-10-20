@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useReducer } from "react";
 import { login } from "../services/AccountApi";
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 function reducer(state, action) {
    switch (action.type) {
@@ -23,12 +24,13 @@ function useAuth() {
 }
 function AuthProvider({ children }) {
    const initialUser = JSON.parse(localStorage.getItem("user"));
-   const [{ token }, dispatch] = useReducer(reducer, { user: initialUser });
-
+   const [{ user }, dispatch] = useReducer(reducer, { user: initialUser });
+   const navigate = useNavigate();
    async function handleLogin(email, password) {
       try {
          const data = await login(email, password);
          dispatch({ type: "login", payload: data });
+         //navigate(`${data?.roles[0]}-profile`, { replace: true });
       } catch (error) {
          console.log(error.message);
       }
@@ -41,7 +43,7 @@ function AuthProvider({ children }) {
    }
    return (
       <AuthContext.Provider
-         value={{ token, handleLogin, handleLogout, isAuthenticated }}
+         value={{ user, handleLogin, handleLogout, isAuthenticated }}
       >
          {children}
       </AuthContext.Provider>

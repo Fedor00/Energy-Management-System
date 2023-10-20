@@ -5,7 +5,9 @@ function Login() {
    return (
       <div>
          <button
-            onClick={() => handleLogin("admin@gmail.com", "TrashTalker00@")}
+            onClick={() =>
+               handleLogin("john.doe@example.com", "TrashTalker00@")
+            }
          >
             Login
          </button>
