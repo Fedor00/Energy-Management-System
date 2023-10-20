@@ -13,8 +13,8 @@ import "./App.css";
 function App() {
    return (
       <div className="app">
-         <BrowserRouter>
-            <AuthProvider>
+         <AuthProvider>
+            <BrowserRouter>
                <Routes>
                   <Route index element={<Homepage />}></Route>
                   <Route path="login" element={<Login />} />
@@ -32,8 +32,8 @@ function App() {
                   </Route>
                   <Route path="*" element={<PageNotFound />} />
                </Routes>
-            </AuthProvider>
-         </BrowserRouter>
+            </BrowserRouter>{" "}
+         </AuthProvider>
       </div>
    );
 }

@@ -15,8 +15,8 @@ const login = async (email, password) => {
       );
       return resp.data;
    } catch (error) {
-      console.error(error.response.data);
-      throw new Error("Failed to login.");
+      console.error(error?.response?.data);
+      throw new Error(error?.response?.data);
    }
 };
 export { login };

@@ -1,5 +1,7 @@
+import HomeNavbar from "../components/HomeNavbar";
+
 function Homepage() {
-   return <div>Welcome Home.</div>;
+   return <HomeNavbar />;
 }
 
 export default Homepage;

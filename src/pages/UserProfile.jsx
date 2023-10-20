@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { userDevices } from "../services/DeviceApi";
 import { useAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
 import Devices from "../components/Devices";
 function UserProfile() {
    const [devices, setDevices] = useState([]);
-   const [error, setError] = useState(null);
    const [loading, setLoading] = useState(false);
    const { user } = useAuth();
    useEffect(() => {
@@ -16,7 +15,7 @@ function UserProfile() {
             setLoading(false);
             setDevices(data);
          } catch (error) {
-            setError(error.message);
+            console.log(error.message);
          }
       }
       retrieveDevices();

@@ -1,8 +1,9 @@
 body{
-    background-position: center;
+    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-
+    width: 100%;
     /* Note: You'll need to adjust the URL to the actual path of your image if it's not in the same directory as index.css */
     background-image: url('/background.png') ;
+
 }
