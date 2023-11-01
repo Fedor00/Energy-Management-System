@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import { userDevices } from "../services/DeviceApi";
 import { useAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
-import Devices from "../components/Devices";
+import UserDevices from "../components/User/UserDevices";
+import { userDevicesApi } from "../services/DeviceApi";
 function UserProfile() {
-   const [devices, setDevices] = useState([]);
+   const [devices, setDevices] = useState(null);
    const [loading, setLoading] = useState(false);
    const { user } = useAuth();
    useEffect(() => {
       async function retrieveDevices() {
          try {
             setLoading(true);
-            const data = await userDevices(user);
+            const data = await userDevicesApi(user);
             setLoading(false);
             setDevices(data);
          } catch (error) {
@@ -23,7 +23,7 @@ function UserProfile() {
    return (
       <div>
          {loading && <Loader />}
-         {devices && <Devices devices={devices}></Devices>}
+         {devices && <UserDevices devices={devices}></UserDevices>}
       </div>
    );
 }

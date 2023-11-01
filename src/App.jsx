@@ -8,8 +8,10 @@ import Homepage from "./pages/Homepage";
 import UserProfile from "./pages/UserProfile";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import Unauthorized from "./pages/Unauthorized";
-import ManagerProfile from "./pages/ManagerProfile";
+import ManagerProfile from "./pages/Manager/ManagerProfile";
 import "./App.css";
+import ManagerUsers from "./pages/Manager/ManagerUsers";
+import ManagerDevices from "./pages/Manager/ManagerDevices";
 function App() {
    return (
       <div className="app">
@@ -25,10 +27,16 @@ function App() {
                   <Route
                      element={<ProtectedRoutes allowedRoles={["Manager"]} />}
                   >
-                     <Route
-                        path="manager-profile"
-                        element={<ManagerProfile />}
-                     />
+                     <Route path="manager-profile" element={<ManagerProfile />}>
+                        <Route
+                           path="manage-users"
+                           element={<ManagerUsers />}
+                        ></Route>
+                        <Route
+                           path="manage-devices"
+                           element={<ManagerDevices />}
+                        ></Route>
+                     </Route>
                   </Route>
                   <Route path="*" element={<PageNotFound />} />
                </Routes>

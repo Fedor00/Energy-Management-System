@@ -1,21 +1,6 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8085/api/devices";
-
-const userDevicesApi = async (user) => {
-   try {
-      const resp = await axios.get(`${API_URL}/user`, {
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
-         },
-      });
-      return resp.data;
-   } catch (error) {
-      throw new Error("Failed to retrieve devices for current user.");
-   }
-};
-const fetchDevicesApi = async (user) => {
+const API_URL = "http://localhost:8086/api/users";
+const fetchUsersApi = async (user) => {
    try {
       const resp = await axios.get(`${API_URL}`, {
          headers: {
@@ -28,9 +13,9 @@ const fetchDevicesApi = async (user) => {
       throw new Error("Failed to retrieve devices .");
    }
 };
-const deleteDeviceApi = async (device, user) => {
+const deleteUserApi = async (userObj, user) => {
    try {
-      const resp = await axios.delete(`${API_URL}/${device?.id}`, {
+      const resp = await axios.delete(`${API_URL}/${userObj?.id}`, {
          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -43,9 +28,9 @@ const deleteDeviceApi = async (device, user) => {
       throw new Error("Failed to delete the device.");
    }
 };
-const updateDeviceApi = async (device, user) => {
+const updateUserApi = async (userObj, user) => {
    try {
-      const resp = await axios.put(`${API_URL}`, device, {
+      const resp = await axios.put(`${API_URL}`, userObj, {
          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -55,28 +40,22 @@ const updateDeviceApi = async (device, user) => {
       return resp.data;
    } catch (error) {
       console.log(error);
-      throw new Error("Failed to update the device.");
+      throw new Error("Failed to update the user.");
    }
 };
-const addDeviceApi = async (device, user) => {
+const addUserApi = async (userObj, user) => {
    try {
-      const resp = await axios.post(`${API_URL}`, device, {
+      const resp = await axios.post(`${API_URL}`, userObj, {
          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
          },
       });
-      console.log(resp);
+      console.log(resp.data);
       return resp.data;
    } catch (error) {
-      console.log(error);
-      throw new Error("Failed to add the device.");
+      console.log(error?.message);
+      throw new Error("Failed to add the user.");
    }
 };
-export {
-   userDevicesApi,
-   fetchDevicesApi,
-   deleteDeviceApi,
-   updateDeviceApi,
-   addDeviceApi,
-};
+export { fetchUsersApi, addUserApi, updateUserApi, deleteUserApi };
